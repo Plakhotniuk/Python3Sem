@@ -5,9 +5,9 @@ fig1, axes = plt.subplots(nrows=1, ncols=3)
 
 data = pd.read_csv('flights.csv', index_col=0)
 data.reset_index()
-
-newdata = pd.DataFrame({'Total flights': [len(data.apply(lambda x: True if x[0] == 'Nimble' else False, axis=1)
-                                              [data.apply(lambda x: True if x[0] == 'Nimble' else False, axis=1)
+print(data)
+newdata = pd.DataFrame({'Total flights': [len(data.apply(lambda x: True if x[0] == i else False, axis=1)
+                                              [data.apply(lambda x: True if x[0] == i else False, axis=1)
                                                == True].index) for i in data['CARGO'].unique()],
                         'Total cost': [data.loc[(data['CARGO'] == i), 'PRICE'].sum() for i in data['CARGO'].unique()],
                         'Total weight': [data.loc[(data['CARGO'] == i), 'WEIGHT'].sum() for i in data['CARGO'].unique()]},
