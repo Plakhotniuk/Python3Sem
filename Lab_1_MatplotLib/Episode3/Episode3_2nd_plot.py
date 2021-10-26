@@ -12,7 +12,9 @@ j, k = 0, 0
 ind = [x for x, _ in enumerate(groups)]
 for i in groups:
     new_data = data.loc[data.Groups.isin([i])]['Marks'].value_counts().sort_index().to_frame()
-    new_data.plot.pie(y='Marks', figsize=(8, 8), ax=axes[j, k], autopct='%1.0f%%', shadow=True, startangle=90, legend=False, fontsize=8, title=i)
+    title = "Group: " + str(i)
+    new_data.plot.pie(y='Marks', figsize=(8, 8), ax=axes[j, k], autopct='%1.0f%%',
+                      shadow=True, startangle=90, legend=False, fontsize=8, title=title)
     axes[j, k].title.set_size(10)
     if not k:
         k+=1
