@@ -10,16 +10,16 @@ plot1 = pd.DataFrame({'Mean number of solved problems':
                     [ejudge.loc[(ejudge['User'].isin(students.loc[(students['group_faculty'] == i),
                     'login']))]['Solved'].mean() for i in students['group_faculty'].unique()]},
                      index=students['group_faculty'].unique())
-
+print(plot1)
 plot1.plot.bar(ax=axes[0], fontsize=12, figsize=(10, 8),
-               title='Mean number of solved problems\nper group faculty', legend=False)
+               title='Mean number of solved problems\nby group faculty', legend=False)
 plot2 = pd.DataFrame({'Mean number of solved problems':
                     [ejudge.loc[(ejudge['User'].isin(students.loc[(students['group_out'] == i),
                     'login']))]['Solved'].mean() for i in students['group_out'].unique()]},
                      index=students['group_out'].unique())
 
 plot2.plot.bar(ax=axes[1], fontsize=12, figsize=(10, 8),
-               title='Mean number of solved problems\nper group out', legend=False)
+               title='Mean number of solved problems\nby group out', legend=False)
 
 plt.savefig('Mean number of solved problems.png')
 plt.show()
