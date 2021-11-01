@@ -7,24 +7,19 @@ data = pd.read_csv('students.csv', sep='[;,|_]', engine='python')
 
 data.columns = ['Preps', 'Groups', 'Marks']
 
-groups = pd.unique(data[['Groups']].values.ravel())
 j, k = 0, 0
-ind = [x for x, _ in enumerate(groups)]
-for i in groups:
+for i in data['Groups'].unique():
     new_data = data.loc[data.Groups.isin([i])]['Marks'].value_counts().sort_index().to_frame()
     title = "Group: " + str(i)
     new_data.plot.pie(y='Marks', figsize=(8, 8), ax=axes[j, k], autopct='%1.0f%%',
                       shadow=True, startangle=90, legend=False, fontsize=8, title=title)
     axes[j, k].title.set_size(10)
     if not k:
-        k+=1
+        k += 1
     else:
-        j +=1
+        j += 1
         k = 0
 
 fig1.tight_layout(pad=1.0)
 plt.savefig('Marks_per_group.png')
 plt.show()
-
-
-
