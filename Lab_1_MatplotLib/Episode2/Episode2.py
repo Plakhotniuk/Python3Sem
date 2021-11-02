@@ -1,12 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-import os
 x = []
 y = []
 
 with open('frames.dat', 'r') as file:
-    print(enumerate(file))
     for ind, lines in enumerate(file):
         if not ind % 2:
             x.append([float(i) for i in lines.split()])
@@ -14,11 +12,15 @@ with open('frames.dat', 'r') as file:
             y.append([float(i) for i in lines.split()])
 
 fig = plt.figure()
-ax = plt.axes(xlim=(min([min(i) for i in x]), max([max(i) for i in x])),
-              ylim=(min([min(i) for i in y]) * 1.2, max([max(i) for i in y]) * 1.2))
+
+x_lim = [min([min(i) for i in x]), max([max(i) for i in x])]
+y_lim = [min([min(i) for i in y]), max([max(i) for i in y])]
+
+ax = plt.axes(xlim=(x_lim[0], x_lim[1]),
+              ylim=(y_lim[0] * 1.2, y_lim[1] * 1.2))
 line, = ax.plot([], [])
 plt.grid()
-plt.yticks(np.arange(min([min(i) for i in y]) * 1.2, max([max(i) for i in y]) * 1.2, 2))
+plt.yticks(np.arange(y_lim[0] * 1.2, y_lim[1] * 1.2, 2))
 
 
 def init():
@@ -35,4 +37,4 @@ def animate(i):
 anim = FuncAnimation(fig, animate, init_func=init,
                      frames=6, interval=500, blit=True)
 
-anim.save(os.path.join('Episode2', 'graphics.gif'), writer='pillow')
+anim.save('graphics.gif', writer='pillow')

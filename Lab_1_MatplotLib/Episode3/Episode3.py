@@ -9,7 +9,7 @@ data.columns = ['Preps', 'Groups', 'Marks']
 
 j, k = 0, 0
 for i in data['Preps'].unique():
-    new_data = data.loc[data['Preps'] == i]['Marks'].value_counts().sort_index()
+    new_data = data.loc[data['Preps'] == i, 'Marks'].value_counts().sort_index()
     new_data.plot.pie(y='Marks', figsize=(8, 8), ax=axes[j, k], autopct='%1.0f%%', shadow=True,
                       startangle=90, legend=False, fontsize=8, title=i)
     axes[j, k].title.set_size(10)

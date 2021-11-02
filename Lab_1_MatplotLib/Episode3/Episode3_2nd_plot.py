@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 
 fig1, axes = plt.subplots(nrows = 3, ncols = 2)
 
-data = pd.read_csv('students.csv', sep='[;,|_]', engine='python')
+data = pd.read_csv('students.csv', sep='[;,|_]', engine='python', header=None)
 
 data.columns = ['Preps', 'Groups', 'Marks']
 
 j, k = 0, 0
 for i in data['Groups'].unique():
-    new_data = data.loc[data.Groups.isin([i])]['Marks'].value_counts().sort_index().to_frame()
+    new_data = data.loc[data.Groups.isin([i]), 'Marks'].value_counts().sort_index()
     title = "Group: " + str(i)
     new_data.plot.pie(y='Marks', figsize=(8, 8), ax=axes[j, k], autopct='%1.0f%%',
                       shadow=True, startangle=90, legend=False, fontsize=8, title=title)
