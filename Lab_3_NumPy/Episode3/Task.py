@@ -3,8 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 data = np.loadtxt('start.dat')
-A = np.zeros([data.shape[0], data.shape[0]])
-np.fill_diagonal(A, 1)
+A = np.diag(np.ones(data.size), 0)
 A[np.arange(data.shape[0]), np.arange(data.shape[0])-1] = -1
 fig = plt.figure()
 ax = plt.axes(xlim=(-1, 51), ylim=(data.min(), data.max()))
