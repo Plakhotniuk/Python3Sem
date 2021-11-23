@@ -25,10 +25,10 @@ y_2 = scipy.integrate.odeint(problem, y0, x_1)
 ax[0].plot(x_1, y_2, label='Scipy')
 ax[0].set_title('Solution of Sympy and Scipy')
 ax[0].legend()
-y_3 = [abs(y_2[i] - y_2[i]) for i in range(len(y_1))]
+
+y_3 = [abs(y_1[i] - y_2[i]) for i in range(len(y_1))]
 ax[1].plot(x_1, y_3)
 ax[1].set_title('Difference between Sympy and Scipy')
 ax[1].grid()
-plt.show()
 plt.savefig('graphics.png')
-
+plt.show()
